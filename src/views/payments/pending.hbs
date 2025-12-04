@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  Swal.fire({
+    icon: "info",
+    title: "Pago pendiente",
+    text: "Tu pago quedó pendiente. Te avisaremos cuando se complete.",
+    confirmButtonText: "Ir al inicio",
+    allowOutsideClick: false
+  }).then(() => {
+    window.location.href = "/";
+  });
+</script>
+<noscript>
+  <h2>Pago pendiente</h2>
+  <p>Tu pago quedó pendiente. Te avisaremos cuando se complete.</p>
+  <a href="/" class="btn">Volver al inicio</a>
+</noscript>

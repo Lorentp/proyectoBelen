@@ -1,0 +1,48 @@
+<h2>Reservar turno para {{service.name}}</h2>
+
+<form action="/appointments/process-payment" method="POST" class="form">
+
+    <input type="hidden" name="serviceId" id="serviceId" value="{{service._id}}">
+    <input type="hidden" name="service" value="{{service.name}}">
+
+    <label>Nombre y apellido</label>
+    <input type="text" name="name" required>
+
+    <label>Teléfono (WhatsApp)</label>
+    <input type="text" name="phone" required>
+
+    <label>Fecha</label>
+    <input type="date" name="date" id="datePicker" required>
+
+    <label>Horarios disponibles</label>
+    <select name="time" id="timeSelect" required>
+        <option value="">Elegí un horario</option>
+    </select>
+
+    <button class="btn">Continuar al Pago</button>
+</form>
+
+<script>
+    document.getElementById("datePicker").addEventListener("change", async (e) => {
+        const date = e.target.value;
+        const serviceId = "{{service._id}}";
+
+        const res = await fetch(`/appointments/available?date=${date}&serviceId=${serviceId}`);
+        const data = await res.json();
+
+        const select = document.getElementById("timeSelect");
+        select.innerHTML = "";
+
+        if (!Array.isArray(data) || data.length === 0) {
+            select.innerHTML = "<option>No hay horarios disponibles</option>";
+            return;
+        }
+
+        data.forEach(t => {
+            const op = document.createElement("option");
+            op.value = t;
+            op.textContent = t;
+            select.appendChild(op);
+        });
+    });
+</script>

@@ -1,0 +1,13 @@
+<h2>Servicios</h2>
+
+<div class="services-grid">
+    {{#each services}}
+        <div class="card">
+            <h3>{{this.name}}</h3>
+            <p>{{this.description}}</p>
+            <p class="price">$ {{this.price}}</p>
+
+            <a href="/services/{{this._id}}" class="btn">Ver Detalles</a>
+        </div>
+    {{/each}}
+</div>

@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  Swal.fire({
+    icon: "success",
+    title: "Turno confirmado",
+    text: `Hola {{name}}! Tu turno de {{service}} fue confirmado para el {{date}} a las {{time}}.`,
+    confirmButtonText: "Ir al inicio",
+    allowOutsideClick: false
+  }).then(() => {
+    window.location.href = "/";
+  });
+</script>
+<noscript>
+  <h2>Turno confirmado</h2>
+  <p>Hola {{name}}! Tu turno de {{service}} fue confirmado para el {{date}} a las {{time}}.</p>
+  <a href="/" class="btn">Volver al inicio</a>
+</noscript>

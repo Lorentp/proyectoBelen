@@ -1,0 +1,30 @@
+<h1>Gestión de Servicios</h1>
+
+<button class="btn btn-primary" onclick="openCreateService()">Nuevo Servicio</button>
+
+<table class="service-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each services}}
+    <tr data-id="{{this._id}}">
+      <td class="service-name">{{this.name}}</td>
+      <td class="service-description">{{this.description}}</td>
+      <td class="service-price">${{this.price}}</td>
+      <td>
+        <button class="btn-edit" onclick="openEditService('{{this._id}}')">Editar</button>
+        <button class="btn-delete" onclick="deleteService('{{this._id}}')">Eliminar</button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/adminServices.js"></script>

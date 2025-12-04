@@ -1,0 +1,9 @@
+<h2>{{service.name}}</h2>
+
+<p>{{service.description}}</p>
+<p><strong>Duración:</strong> {{service.duration}} minutos</p>
+<p><strong>Precio:</strong> ${{service.price}}</p>
+
+<a href="/appointments/book/{{service._id}}" class="btn">Reservar Turno</a>
+
+<a href="/services" class="btn-secondary">Volver</a>

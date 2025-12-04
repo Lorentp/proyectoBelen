@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  Swal.fire({
+    icon: "error",
+    title: "Pago rechazado",
+    text: "No pudimos procesar el pago. Intenta nuevamente.",
+    confirmButtonText: "Volver al inicio",
+    allowOutsideClick: false
+  }).then(() => {
+    window.location.href = "/";
+  });
+</script>
+<noscript>
+  <h2>Pago rechazado</h2>
+  <p>No pudimos procesar el pago. Intenta nuevamente.</p>
+  <a href="/" class="btn">Volver al inicio</a>
+</noscript>

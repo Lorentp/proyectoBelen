@@ -1,0 +1,65 @@
+<div class="week-shell">
+  <div class="week-header">
+    <div>
+      <p class="week-label">Agenda semanal</p>
+      <h1>Turnos</h1>
+    </div>
+    <div class="week-nav">
+      <a class="btn-secondary" href="/admin/appointments-week?pass={{pass}}&week={{prevWeek}}">← Anterior</a>
+      <a class="btn" href="/admin/appointments-week?pass={{pass}}">Hoy</a>
+      <a class="btn-secondary" href="/admin/appointments-week?pass={{pass}}&week={{nextWeek}}">Siguiente →</a>
+    </div>
+  </div>
+
+  <div class="week-carousel" id="week-carousel">
+    {{#each days}}
+    <section class="day-slide">
+      <div class="day-chip">{{label}}</div>
+
+      {{#if items.length}}
+        {{#each items}}
+        <div class="appointment-card status-{{this.status}}">
+          <div class="appointment-top">
+            <div class="time">{{this.time}}</div>
+            <div class="name">{{this.name}}</div>
+          </div>
+          <div class="appointment-sub">
+            <small>{{this.service}}</small>
+          </div>
+
+          <div class="actions">
+            <button onclick="editAppointment('{{this._id}}')" class="btn-edit">Editar</button>
+            <button onclick="deleteAppointment('{{this._id}}')" class="btn-delete">Eliminar</button>
+          </div>
+        </div>
+        {{/each}}
+      {{else}}
+        <p class="no-turns">Sin turnos</p>
+      {{/if}}
+    </section>
+    {{/each}}
+  </div>
+
+  <div class="carousel-controls">
+    <button class="control-btn" data-dir="-1">⟵</button>
+    <button class="control-btn" data-dir="1">⟶</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/adminAppointments.js"></script>
+<script>
+  (function() {
+    const carousel = document.getElementById("week-carousel");
+    const buttons = document.querySelectorAll(".control-btn");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const dir = Number(btn.dataset.dir);
+        const slide = carousel.querySelector(".day-slide");
+        const step = slide ? slide.getBoundingClientRect().width + 16 : carousel.clientWidth;
+        carousel.scrollBy({ left: dir * step, behavior: "smooth" });
+      });
+    });
+  })();
+</script>
