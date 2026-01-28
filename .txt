@@ -1,0 +1,13 @@
+duracion de servicios cada media hora,
+
+integratr whatsapp
+
+mejorar uia
+
+que admin pueda bloquear horas o dias completos
+
+integrar a mobile
+
+endopoint mp con pago realizado
+
+que servicios puedan desde admin modificarse o borrarse
