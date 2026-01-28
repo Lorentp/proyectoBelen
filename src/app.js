@@ -11,6 +11,9 @@ require('dotenv').config();
 
 const app = express();
 
+// Necesario para obtener el protocolo correcto (http/https) cuando estamos detrás de ngrok u otro proxy
+app.set('trust proxy', true);
+
 // ==============================
 // Conexión a la base de datos
 // ==============================

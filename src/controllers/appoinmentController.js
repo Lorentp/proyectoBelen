@@ -10,6 +10,11 @@ const mpClient = new MercadoPagoConfig({
   accessToken: process.env.MP_ACCESS_TOKEN
 });
 
+const buildBaseUrl = (req) => {
+  const proto = req.get("x-forwarded-proto") || req.protocol;
+  return process.env.BASE_URL || `${proto}://${req.get("host")}`;
+};
+
 module.exports = {
 
   // 1) Renderizar página para seleccionar servicio
@@ -95,6 +100,7 @@ module.exports = {
       const serviceDoc = serviceId ? await Service.findById(serviceId).lean() : null;
       const serviceName = serviceNameForm || serviceDoc?.name || "Servicio";
       const price = serviceDoc?.price ? Number(serviceDoc.price) : 1000;
+      const baseUrl = buildBaseUrl(req);
 
       const preference = new Preference(mpClient);
       const pref = await preference.create({
@@ -108,9 +114,9 @@ module.exports = {
             }
           ],
           back_urls: {
-            success: `${process.env.BASE_URL}/appointments/payment-success?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&service=${encodeURIComponent(serviceName)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`,
-            failure: `${process.env.BASE_URL}/appointments/payment-failed`,
-            pending: `${process.env.BASE_URL}/appointments/payment-failed`
+            success: `${baseUrl}/appointments/payment-success?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&service=${encodeURIComponent(serviceName)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`,
+            failure: `${baseUrl}/appointments/payment-failed`,
+            pending: `${baseUrl}/appointments/payment-failed`
           },
           auto_return: "approved",
           external_reference: `${phone}-${date}-${time}`

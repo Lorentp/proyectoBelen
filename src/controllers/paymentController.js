@@ -5,9 +5,15 @@ const client = new MercadoPagoConfig({
   accessToken: process.env.MP_ACCESS_TOKEN,
 });
 
+const getBaseUrl = (req) => {
+  const proto = req.get("x-forwarded-proto") || req.protocol;
+  return process.env.BASE_URL || `${proto}://${req.get("host")}`;
+};
+
 exports.createPreference = async (req, res) => {
   try {
     const { appointmentId, title, price } = req.body;
+    const baseUrl = getBaseUrl(req);
 
     const body = {
       items: [
@@ -20,9 +26,9 @@ exports.createPreference = async (req, res) => {
         },
       ],
       back_urls: {
-        success: `${process.env.BASE_URL}/payments/success`,
-        failure: `${process.env.BASE_URL}/payments/failure`,
-        pending: `${process.env.BASE_URL}/payments/pending`,
+        success: `${baseUrl}/payments/success`,
+        failure: `${baseUrl}/payments/failure`,
+        pending: `${baseUrl}/payments/pending`,
       },
       auto_return: "approved",
     };
