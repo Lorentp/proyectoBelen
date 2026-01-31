@@ -1,0 +1,64 @@
+<div class="week-shell">
+  <div class="week-header">
+    <div>
+      <p class="week-label">Disponibilidad</p>
+      <h1>Bloqueos</h1>
+      <p class="muted">Bloqueá un día completo o un rango horario para que no se puedan sacar turnos.</p>
+    </div>
+
+    <div class="week-nav">
+      <a class="btn-secondary" href="/admin?pass={{pass}}">Volver</a>
+      <button class="btn" onclick="openCreateBlock()">Nuevo bloqueo</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <form method="GET" action="/admin/blocks" class="form" style="box-shadow:none; border:none; padding:0;">
+      <input type="hidden" name="pass" value="{{pass}}">
+      <div class="grid-2">
+        <div class="field">
+          <label>Filtrar por fecha</label>
+          <input type="date" name="date" value="{{date}}">
+          <small class="hint">Dejá vacío para ver todos.</small>
+        </div>
+        <div class="field" style="align-self:end;">
+          <button class="btn btn-full" type="submit">Filtrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    {{#if blocks.length}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Desde</th>
+            <th>Hasta</th>
+            <th>Motivo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each blocks}}
+          <tr>
+            <td><strong>{{this.date}}</strong></td>
+            <td>{{this.startTime}}</td>
+            <td>{{this.endTime}}</td>
+            <td>{{this.reason}}</td>
+            <td style="text-align:right;">
+              <button class="btn-delete" onclick="deleteBlock('{{this._id}}','{{../date}}')">Eliminar</button>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p class="muted">No hay bloqueos cargados.</p>
+    {{/if}}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/adminBlocks.js"></script>

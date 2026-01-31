@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const adminController = require("../controllers/adminController");
+const blockedSlotController = require("../controllers/blockedSlotController");
 
 // admin password from env or default
 const ADMIN_PASS = process.env.ADMIN_PASS || "1234";
@@ -26,6 +27,11 @@ router.post("/services/delete/:id", adminAuth, adminController.deleteService);
 router.get("/appointments-week", adminAuth, adminController.getWeekAppointments);
 router.post("/appointments-week/update/:id", adminAuth, adminController.updateAppointmentFromWeek);
 router.post("/appointments-week/delete/:id", adminAuth, adminController.deleteAppointmentFromWeek);
+
+// BLOCKED SLOTS (manual blocks)
+router.get("/blocks", adminAuth, blockedSlotController.getBlocks);
+router.post("/blocks/create", adminAuth, blockedSlotController.createBlock);
+router.post("/blocks/delete/:id", adminAuth, blockedSlotController.deleteBlock);
 
 // API to fetch single appointment (used by SweetAlert editor)
 router.get("/api/appointment/:id", adminAuth, adminController.getAppointmentById);

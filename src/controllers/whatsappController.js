@@ -13,10 +13,11 @@ module.exports = {
       if (!apiKey) throw new Error("TEXTMEBOT_API_KEY missing");
 
       const baseUrl = (process.env.TEXTMEBOT_BASE_URL || "https://api.textmebot.com").replace(/\/+$/, "");
-      const recipient = (phone || "").replace(/\s+/g, "");
+      const recipientRaw = (phone || "").trim();
 
-      // TextMeBot expects recipient usually without '+' (e.g. 54911XXXXXXXX)
-      const normalizedRecipient = recipient.startsWith("+") ? recipient.slice(1) : recipient;
+      // TextMeBot typically expects only digits (e.g. 54911XXXXXXXX), without '+', spaces, dashes, etc.
+      const normalizedRecipient = recipientRaw.replace(/\D/g, "");
+      if (!normalizedRecipient) throw new Error("Recipient phone is empty/invalid");
 
       const params = {
         recipient: normalizedRecipient,
@@ -27,8 +28,9 @@ module.exports = {
       const resp = await axios.get(`${baseUrl}/send.php`, { params });
 
       // TextMeBot responses vary; treat HTTP 2xx as success unless it clearly indicates error.
-      if (resp?.data && typeof resp.data === "string" && /error|invalid|denied/i.test(resp.data)) {
-        throw new Error(resp.data);
+      const body = resp?.data;
+      if (typeof body === "string" && /error|invalid|denied/i.test(body)) {
+        throw new Error(body);
       }
 
       return true;

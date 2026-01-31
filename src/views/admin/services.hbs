@@ -7,6 +7,7 @@
     <tr>
       <th>Nombre</th>
       <th>Descripción</th>
+      <th>Duración</th>
       <th>Precio</th>
       <th>Acciones</th>
     </tr>
@@ -16,6 +17,7 @@
     <tr data-id="{{this._id}}">
       <td class="service-name">{{this.name}}</td>
       <td class="service-description">{{this.description}}</td>
+      <td class="service-duration">{{this.duration}} min</td>
       <td class="service-price">${{this.price}}</td>
       <td>
         <button class="btn-edit" onclick="openEditService('{{this._id}}')">Editar</button>
@@ -28,3 +30,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/adminServices.js"></script>
+

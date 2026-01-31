@@ -1,9 +1,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+  const whatsappOk = {{#if whatsappOk}}true{{else}}false{{/if}};
+  const whatsappMessage = `{{whatsappMessage}}`;
+
   Swal.fire({
-    icon: "success",
-    title: "Turno confirmado",
-    text: `Hola {{name}}! Tu turno de {{service}} fue confirmado para el {{date}} a las {{time}}.`,
+    icon: whatsappOk ? "success" : "warning",
+    title: whatsappOk ? "Turno confirmado" : "Turno confirmado (sin WhatsApp)",
+    text: whatsappOk
+      ? `Hola {{name}}! Tu turno de {{service}} fue confirmado para el {{date}} a las {{time}}.`
+      : `Tu turno fue confirmado y quedó guardado.\n\nMensaje:\n${whatsappMessage}\n\nNo pudimos enviar el WhatsApp automáticamente. Revisá el número e intentá nuevamente.`,
     confirmButtonText: "Ir al inicio",
     allowOutsideClick: false
   }).then(() => {

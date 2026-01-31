@@ -1,13 +1,25 @@
-<h2>Servicios</h2>
+<div class="page-header">
+  <h2>Servicios</h2>
+  <p class="muted">Elegí el servicio y reservá tu turno.</p>
+</div>
 
 <div class="services-grid">
-    {{#each services}}
-        <div class="card">
-            <h3>{{this.name}}</h3>
-            <p>{{this.description}}</p>
-            <p class="price">$ {{this.price}}</p>
+  {{#each services}}
+    <div class="card service-card">
+      <div class="service-card-top">
+        <h3 class="service-title">{{this.name}}</h3>
+        <span class="pill">$ {{this.price}}</span>
+      </div>
 
-            <a href="/services/{{this._id}}" class="btn">Ver Detalles</a>
-        </div>
-    {{/each}}
+      {{#if this.description}}
+        <p class="muted">{{this.description}}</p>
+      {{/if}}
+
+      <div class="service-meta">
+        <span class="mini">⏱ {{#if this.duration}}{{this.duration}}{{else}}30{{/if}} min</span>
+      </div>
+
+      <a href="/services/{{this._id}}" class="btn btn-full">Ver detalles</a>
+    </div>
+  {{/each}}
 </div>

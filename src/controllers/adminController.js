@@ -26,8 +26,8 @@ module.exports = {
 
   async createService(req, res) {
     try {
-      const { name, description, price } = req.body;
-      await Service.create({ name, description, price });
+      const { name, description, duration, price } = req.body;
+      await Service.create({ name, description, duration, price });
       const pass = req.query.pass || req.body.pass || ADMIN_PASS;
       res.redirect(`/admin/services?pass=${pass}`);
     } catch (err) {
@@ -38,8 +38,8 @@ module.exports = {
 
   async updateService(req, res) {
     try {
-      const { name, description, price } = req.body;
-      await Service.findByIdAndUpdate(req.params.id, { name, description, price });
+      const { name, description, duration, price } = req.body;
+      await Service.findByIdAndUpdate(req.params.id, { name, description, duration, price });
       const pass = req.query.pass || req.body.pass || ADMIN_PASS;
       res.redirect(`/admin/services?pass=${pass}`);
     } catch (err) {

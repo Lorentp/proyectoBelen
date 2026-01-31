@@ -1,9 +1,14 @@
-<h2>{{service.name}}</h2>
+<div class="page-header">
+  <a href="/services" class="link-back">← Volver</a>
+  <h2>{{service.name}}</h2>
+  {{#if service.description}}<p class="muted">{{service.description}}</p>{{/if}}
+</div>
 
-<p>{{service.description}}</p>
-<p><strong>Duración:</strong> {{service.duration}} minutos</p>
-<p><strong>Precio:</strong> ${{service.price}}</p>
+<div class="card service-detail">
+  <div class="service-detail-row">
+    <div class="pill">$ {{service.price}}</div>
+    <div class="mini">⏱ {{#if service.duration}}{{service.duration}}{{else}}30{{/if}} min</div>
+  </div>
 
-<a href="/appointments/book/{{service._id}}" class="btn">Reservar Turno</a>
-
-<a href="/services" class="btn-secondary">Volver</a>
+  <a href="/appointments/book/{{service._id}}" class="btn btn-full">Reservar turno</a>
+</div>

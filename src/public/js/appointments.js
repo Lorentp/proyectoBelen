@@ -9,12 +9,13 @@ const timeSelect = document.getElementById("timeSelect");
 if (datePicker) {
     datePicker.addEventListener("change", async (e) => {
         const date = e.target.value;
-        const serviceId = document.getElementById("serviceId")?.value || "{{service._id}}";
+        const serviceId = document.getElementById("serviceId")?.value || "";
 
         if (!date) return;
 
         try {
-            const res = await fetch(`/appointments/available?date=${date}&serviceId=${serviceId}`);
+            timeSelect.innerHTML = `<option value="">Cargando...</option>`;
+            const res = await fetch(`/appointments/available?date=${encodeURIComponent(date)}&serviceId=${encodeURIComponent(serviceId)}`);
             const times = await res.json();
 
             timeSelect.innerHTML = "";

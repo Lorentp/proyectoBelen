@@ -6,6 +6,12 @@ const ServiceSchema = new mongoose.Schema({
     required: true,
   },
   description: String,
+  // Duración del servicio en minutos (para bloquear turnos por rango)
+  duration: {
+    type: Number,
+    required: true,
+    default: 30
+  },
   price: {
     type: Number,
     required: true,

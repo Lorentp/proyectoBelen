@@ -2,8 +2,8 @@
 <script>
   Swal.fire({
     icon: "error",
-    title: "Pago cancelado",
-    text: "El pago fue cancelado o falló. Podés intentar nuevamente.",
+    title: "{{title}}",
+    text: "{{#if message}}{{message}}{{else}}El pago fue cancelado o falló. Podés intentar nuevamente.{{/if}}",
     confirmButtonText: "Ir al inicio",
     allowOutsideClick: false
   }).then(() => {
@@ -11,7 +11,7 @@
   });
 </script>
 <noscript>
-  <h2>Pago cancelado</h2>
-  <p>El pago fue cancelado o falló. Podés intentar nuevamente.</p>
+  <h2>{{title}}</h2>
+  <p>{{#if message}}{{message}}{{else}}El pago fue cancelado o falló. Podés intentar nuevamente.{{/if}}</p>
   <a href="/" class="btn">Volver al inicio</a>
 </noscript>
