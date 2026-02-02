@@ -5,6 +5,7 @@
       <h1>Turnos</h1>
     </div>
     <div class="week-nav">
+      <button class="btn" type="button" onclick="createAppointment()">Nuevo turno</button>
       <a class="btn-secondary" href="/admin/appointments-week?pass={{pass}}&week={{prevWeek}}">← Anterior</a>
       <a class="btn" href="/admin/appointments-week?pass={{pass}}">Hoy</a>
       <a class="btn-secondary" href="/admin/appointments-week?pass={{pass}}&week={{nextWeek}}">Siguiente →</a>
@@ -48,6 +49,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/adminAppointments.js"></script>
+<script>
+  window.ADMIN_SERVICES = {{{json services}}};
+</script>
 <script>
   (function() {
     const carousel = document.getElementById("week-carousel");

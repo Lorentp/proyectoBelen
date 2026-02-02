@@ -25,6 +25,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     background: var(--color-bg);
     font-family: var(--font-main);
@@ -32,6 +37,11 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
 }
 
 /* ================================
@@ -246,6 +256,16 @@ select:focus {
     border-collapse: collapse;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 700px) {
+    /* Evita overflow lateral por tablas en mobile */
+    .table,
+    .service-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .table th,
@@ -507,6 +527,8 @@ select:focus {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding: 6px 4px 12px;
+    max-width: 100%;
+    overscroll-behavior-x: contain;
 }
 
 .week-carousel::-webkit-scrollbar {

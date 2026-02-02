@@ -25,6 +25,7 @@ router.post("/services/delete/:id", adminAuth, adminController.deleteService);
 
 // APPOINTMENTS - weekly calendar + CRUD from week view
 router.get("/appointments-week", adminAuth, adminController.getWeekAppointments);
+router.post("/appointments-week/create", adminAuth, adminController.createAppointmentFromWeek);
 router.post("/appointments-week/update/:id", adminAuth, adminController.updateAppointmentFromWeek);
 router.post("/appointments-week/delete/:id", adminAuth, adminController.deleteAppointmentFromWeek);
 
